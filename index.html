@@ -9,6 +9,7 @@
             margin: 0;
             padding: 0;
             overflow: hidden;
+            background-color: #000;
         }
     </style>
 </head>
@@ -19,9 +20,9 @@
         embedded
         arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;">
 
-        <!-- Define the AR marker -->
+        <!-- Define o AR marker -->
         <a-marker preset="hiro">
-            <!-- Add the 3D model -->
+            <!-- Adiciona o modelo 3D -->
             <a-entity
                 position="0 0 0"
                 scale="1 1 1"
@@ -30,7 +31,7 @@
             </a-entity>
         </a-marker>
 
-        <!-- Camera -->
+        <!-- Câmera -->
         <a-entity camera></a-entity>
     </a-scene>
 </body>
