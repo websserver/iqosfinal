@@ -3,6 +3,8 @@
 <head>
     <title>AR Model Viewer</title>
     <script src="https://unpkg.com/hiro-ar-scene-builder@latest/dist/hiro-ar-scene-builder.min.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
@@ -11,9 +13,24 @@
             overflow: hidden;
             background-color: #000;
         }
+        #loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
+    <div id="loading">
+        <h2>Iniciando AR...</h2>
+        <p>Por favor, permita o acesso à câmera quando solicitado</p>
+    </div>
+
     <a-scene
         vr-mode-ui="enabled: false"
         renderer="antialias: true; alpha: true"
@@ -34,5 +51,14 @@
         <!-- Câmera -->
         <a-entity camera></a-entity>
     </a-scene>
+
+    <script>
+        // Esconde a mensagem de loading quando a cena estiver pronta
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loading').style.display = 'none';
+            }, 2000);
+        });
+    </script>
 </body>
 </html> 
