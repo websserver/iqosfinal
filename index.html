@@ -2,8 +2,20 @@
 <html>
 <head>
     <title>AR Model Viewer</title>
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script>
+        AFRAME.registerComponent('model-viewer', {
+            init: function() {
+                this.el.addEventListener('model-loaded', () => {
+                    console.log('Modelo carregado com sucesso');
+                });
+                this.el.addEventListener('model-error', (error) => {
+                    console.error('Erro ao carregar modelo:', error);
+                });
+            }
+        });
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <style>
@@ -37,23 +49,29 @@
     </div>
 
     <a-scene
-        vr-mode-ui="enabled: false"
         embedded
-        arjs="sourceType: webcam; debugUIEnabled: true; detectionMode: mono; markersAreaEnabled: true; patternRatio: 0.75;">
+        loading-screen="enabled: false;"
+        renderer="logarithmicDepthBuffer: true;"
+        vr-mode-ui="enabled: false"
+        gesture-detector
+        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: true; patternRatio: 0.75; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960;">
 
-        <!-- Define o AR marker -->
-        <a-marker preset="hiro">
-            <!-- Adiciona o modelo 3D -->
+        <a-assets>
+            <a-asset-item id="modelo" src="modelos3d/Modelo1/modelo1_green.glb"></a-asset-item>
+        </a-assets>
+
+        <a-marker preset="hiro" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
             <a-entity
+                model-viewer
                 position="0 0 0"
                 scale="0.3 0.3 0.3"
                 rotation="-90 0 0"
-                gltf-model="modelos3d/Modelo1/modelo1_green.glb"
+                gltf-model="#modelo"
+                class="clickable"
                 animation="property: rotation; to: -90 360 0; dur: 5000; easing: linear; loop: true">
             </a-entity>
         </a-marker>
 
-        <!-- Câmera -->
         <a-entity camera></a-entity>
     </a-scene>
 
@@ -69,10 +87,10 @@
             e.preventDefault();
         });
 
-        // Log de erros de carregamento do modelo
-        window.addEventListener('model-error', function(e) {
-            console.error('Erro ao carregar o modelo:', e.detail.target.error);
-        });
+        // Previne scroll
+        document.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
     </script>
 </body>
 </html> 
