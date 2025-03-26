@@ -2,9 +2,8 @@
 <html>
 <head>
     <title>AR Model Viewer</title>
-    <script src="https://unpkg.com/hiro-ar-scene-builder@latest/dist/hiro-ar-scene-builder.min.js"></script>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
@@ -35,15 +34,15 @@
         vr-mode-ui="enabled: false"
         renderer="antialias: true; alpha: true"
         embedded
-        arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;">
+        arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: true;">
 
         <!-- Define o AR marker -->
         <a-marker preset="hiro">
             <!-- Adiciona o modelo 3D -->
             <a-entity
-                position="0 0 0"
-                scale="1 1 1"
-                rotation="0 0 0"
+                position="0 0.5 0"
+                scale="0.5 0.5 0.5"
+                rotation="-90 0 0"
                 gltf-model="Modelos 3d/Modelo1/modelo1_green.glb">
             </a-entity>
         </a-marker>
