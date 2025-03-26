@@ -2,8 +2,8 @@
 <html>
 <head>
     <title>AR Model Viewer</title>
-    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1.3.0/dist/aframe-master.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <style>
@@ -30,7 +30,7 @@
         }
     </style>
 </head>
-<body>
+<body style="margin: 0; overflow: hidden;">
     <div id="loading">
         <h2>Iniciando AR...</h2>
         <p>Por favor, permita o acesso à câmera quando solicitado</p>
@@ -38,15 +38,14 @@
 
     <a-scene
         vr-mode-ui="enabled: false"
-        renderer="logarithmicDepthBuffer: true; antialias: true; alpha: true"
         embedded
-        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: true; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+        arjs="sourceType: webcam; debugUIEnabled: true; detectionMode: mono; markersAreaEnabled: true; patternRatio: 0.75;">
 
         <!-- Define o AR marker -->
-        <a-marker type="pattern" preset="hiro" smooth="true" smoothCount="5">
+        <a-marker preset="hiro">
             <!-- Adiciona o modelo 3D -->
             <a-entity
-                position="0 1 0"
+                position="0 0 0"
                 scale="0.3 0.3 0.3"
                 rotation="-90 0 0"
                 gltf-model="modelos3d/Modelo1/modelo1_green.glb"
@@ -68,6 +67,11 @@
         // Previne zoom no iOS
         document.addEventListener('gesturestart', function(e) {
             e.preventDefault();
+        });
+
+        // Log de erros de carregamento do modelo
+        window.addEventListener('model-error', function(e) {
+            console.error('Erro ao carregar o modelo:', e.detail.target.error);
         });
     </script>
 </body>
