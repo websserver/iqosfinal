@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AR Model Viewer - Hiro Marker</title>
+    <title>AR Model Viewer</title>
     <script src="https://unpkg.com/hiro-ar-scene-builder@latest/dist/hiro-ar-scene-builder.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
@@ -11,47 +11,9 @@
             overflow: hidden;
             background-color: #000;
         }
-        #loading {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            z-index: 1000;
-        }
-        #marker-container {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 200px;
-            height: 200px;
-            background-color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        #marker-image {
-            width: 180px;
-            height: 180px;
-        }
     </style>
 </head>
 <body>
-    <div id="loading">
-        <h2>Carregando AR...</h2>
-        <p>Por favor, permita o acesso à câmera quando solicitado</p>
-    </div>
-
-    <!-- Container para o marcador Hiro -->
-    <div id="marker-container">
-        <img id="marker-image" src="https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/images/HIRO.jpg" alt="Hiro Marker">
-    </div>
-
-    <!-- Cena AR -->
     <a-scene
         vr-mode-ui="enabled: false"
         renderer="antialias: true; alpha: true"
@@ -72,14 +34,5 @@
         <!-- Câmera -->
         <a-entity camera></a-entity>
     </a-scene>
-
-    <script>
-        // Esconde a mensagem de loading quando a cena estiver pronta
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.getElementById('loading').style.display = 'none';
-            }, 2000);
-        });
-    </script>
 </body>
 </html> 
