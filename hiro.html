@@ -11,6 +11,16 @@
             overflow: hidden;
             background-color: #000;
         }
+        #loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            z-index: 1000;
+        }
         #marker-container {
             position: fixed;
             top: 50%;
@@ -31,6 +41,11 @@
     </style>
 </head>
 <body>
+    <div id="loading">
+        <h2>Carregando AR...</h2>
+        <p>Por favor, permita o acesso à câmera quando solicitado</p>
+    </div>
+
     <!-- Container para o marcador Hiro -->
     <div id="marker-container">
         <img id="marker-image" src="https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/images/HIRO.jpg" alt="Hiro Marker">
@@ -59,10 +74,12 @@
     </a-scene>
 
     <script>
-        // Redireciona para a página principal após 3 segundos
-        setTimeout(function() {
-            window.location.href = "https://websserver.github.io/iqosfinal/";
-        }, 3000);
+        // Esconde a mensagem de loading quando a cena estiver pronta
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loading').style.display = 'none';
+            }, 2000);
+        });
     </script>
 </body>
 </html> 
